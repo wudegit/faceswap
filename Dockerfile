@@ -7,15 +7,14 @@ RUN apt-get update -qq \
  && apt-get install --no-install-recommends -y \
     # install essentials
 	build-essential \ 
-	cmake \
-	# Boost for dlib
-	libboost-all-dev \ 
 	# install python 3
 	python3.5 \ 
+	python3-dev \
 	python3-pip \ 
-	python3-virtualenv \ 
 	python3-wheel \ 
-	pkg-config \
+	# Boost for dlib
+	cmake \
+	libboost-all-dev \ 
 	# requirements for keras
 	python3-h5py \
 	python3-yaml \
@@ -24,7 +23,7 @@ RUN apt-get update -qq \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-COPY ./requirements.txt .
-RUN pip3 --no-cache-dir install -r ./requirements.txt
+COPY ./requirements-python35.txt .
+RUN pip3 --no-cache-dir install -r ./requirements-python35.txt
 
 WORKDIR /srv/
